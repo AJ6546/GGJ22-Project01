@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] GameObject obj;
+    [SerializeField] GameObject obj,otherPlayer;
     [SerializeField] float min, max;
     [SerializeField] bool spawnOnStart;
     [SerializeField] FixedButton spawnButton;
@@ -54,7 +54,7 @@ public class Spawner : MonoBehaviour
             if (cd.nextAttackTime["Spawn"]
             < Time.time && (Input.GetKeyDown("1") || spawnButton.Pressed))
             {
-                Vector3 spawnPos = transform.position + new Vector3(Random.Range(min, max), 0, Random.Range(min, max));
+                Vector3 spawnPos = otherPlayer.transform.position + new Vector3(Random.Range(min, max),otherPlayer.transform.position.y,Random.Range(min, max));
                 Instantiate(obj, spawnPos, obj.transform.rotation);
                 cd.nextAttackTime["Spawn"] = cd.cooldownTimer["Spawn"] + (int)Time.time;
                 fill.GetComponent<Image>().fillAmount = 1;
