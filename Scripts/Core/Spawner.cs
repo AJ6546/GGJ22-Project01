@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] GameObject obj,otherPlayer;
-    [SerializeField] float min, max;
+    [SerializeField] float min, max, height=1;
     [SerializeField] bool spawnOnStart;
     [SerializeField] FixedButton spawnButton;
     [SerializeField] GameObject fill;
@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     {
         if (spawnOnStart)
         {
-            Vector3 spawnPos = transform.position + new Vector3(Random.Range(min, max), 1, Random.Range(min, max));
+            Vector3 spawnPos = transform.position + new Vector3(Random.Range(min, max), height, Random.Range(min, max));
             Instantiate(obj, spawnPos, obj.transform.rotation);
         }
         else
@@ -24,15 +24,15 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
 
     {
         if (!spawnOnStart)
         {
             Refill();
-            Attack();
+            Spawn();
         }
+      
     }
     #region Refill
     void Refill()
@@ -49,12 +49,12 @@ public class Spawner : MonoBehaviour
     #endregion
 
     #region Attack_Defend
-    void Attack()
+    void Spawn()
     {
             if (cd.nextAttackTime["Spawn"]
             < Time.time && (Input.GetKeyDown("1") || spawnButton.Pressed))
             {
-                Vector3 spawnPos = otherPlayer.transform.position + new Vector3(Random.Range(min, max),otherPlayer.transform.position.y,Random.Range(min, max));
+                Vector3 spawnPos = otherPlayer.transform.position + new Vector3(Random.Range(min, max),0,Random.Range(min, max));
                 Instantiate(obj, spawnPos, obj.transform.rotation);
                 cd.nextAttackTime["Spawn"] = cd.cooldownTimer["Spawn"] + (int)Time.time;
                 fill.GetComponent<Image>().fillAmount = 1;

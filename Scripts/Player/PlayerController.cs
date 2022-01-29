@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] FixedJoystick fixedJoystick;
-
-    [SerializeField] FixedButton jumpButton;
+    [SerializeField] Vector3 startPos;
+    [SerializeField] FixedButton jumpButton, recoverButton;
     [SerializeField] FixedTouchField touchField;
     public string s;
     [SerializeField] ThirdPersonUserControl control;
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     
     void Awake()
     {
+        startPos = transform.position;
         control = GetComponent<ThirdPersonUserControl>();
     }
 
@@ -33,5 +34,13 @@ public class PlayerController : MonoBehaviour
         control.m_Jump = jumpButton.Pressed || Input.GetKey("space");
         control.hInput = fixedJoystick.Horizontal;
         control.vInput = fixedJoystick.Vertical;
+        if(transform.position.y<=-5)
+        {
+            transform.position = startPos;
+        }
+        if (recoverButton.Pressed)
+        {
+            transform.position = new Vector3(transform.position.x+2f, 2, transform.position.z+2f);
+        }
     }
 }
