@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameOverPanel=null;
     [SerializeField] Text ip;
     [SerializeField] Image msg;
+    public int killCount = 0;
+    public int reqkillCount = 4;
     private void Start()
     {
         resetTime = cooldown + (int)Time.time;

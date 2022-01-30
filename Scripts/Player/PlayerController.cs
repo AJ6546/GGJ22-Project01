@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         cameraAngle += touchField.TouchDist.x * cameraSpeed;
         camera.transform.position = transform.position + Quaternion.AngleAxis(cameraAngle, Vector3.up) * cameraOffset;
         camera.transform.rotation = Quaternion.LookRotation(transform.position + Vector3.up * rotOffset - camera.transform.position, Vector3.up);
-        control.m_Jump = jumpButton.Pressed || Input.GetKey("space");
+        control.m_Jump = jumpButton.Pressed;
         control.hInput = fixedJoystick.Horizontal;
         control.vInput = fixedJoystick.Vertical;
         if(transform.position.y<=-5)

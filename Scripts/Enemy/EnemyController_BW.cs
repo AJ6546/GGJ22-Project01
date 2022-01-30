@@ -10,7 +10,7 @@ public class EnemyController_BW : MonoBehaviour
     [SerializeField] List<PlayerController> players = new List<PlayerController>();
     [SerializeField] PlayerController player;
     NavMeshAgent navMeshAgent;
-    [SerializeField] string s = "";
+    public string s = "";
     [SerializeField] Projectiles ammo;
     [SerializeField] CooldownTimer cd;
     public Transform instantiatorTransform;
@@ -82,4 +82,5 @@ public class EnemyController_BW : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, stoppingDistance);
     }
+    
 }
