@@ -11,7 +11,7 @@ public class CooldownTimer : MonoBehaviour
         { "Spawn", 7},
         { "EnemyAttack", 7 },
         { "Attack2",2 },
-        { "Heal",15 }
+        { "Heal",7 }
     };
     public Dictionary<string, float> nextAttackTime = new Dictionary<string, float>
     {

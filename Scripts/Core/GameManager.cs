@@ -58,19 +58,19 @@ public class GameManager : MonoBehaviour
                 hint.text = "The orbs appear high in the sky now. Push the new Buttons and figure it out!";
                 break;
             case "6":
-                hint.text = "Creapy Enemies ! This Must be fun!";
+                hint.text = "Creapy Enemies ! This Must be fun! Kill 2 Enemies";
                 break;
             case "7":
-                hint.text = "More Enemies! Use the powers and work togather!";
+                hint.text = "More Enemies! Use the powers and work togather! Kill 3 Enemies";
                 break;
             case "8":
-                hint.text = "New Powers!";
+                hint.text = "New Powers! Kill 4 Enemies";
                 break;
             case "9":
-                hint.text = "Kill!!!";
+                hint.text = "Kill!!! Kill 6 Enemies";
                 break;
             case "10":
-                hint.text = "Run!!! or Die, That works too";
+                hint.text = "Run!!! or Die, That works too. Kill 4 Enemies";
                 break;
             case "11":
                 hint.text = "Beat The Boss!!";
