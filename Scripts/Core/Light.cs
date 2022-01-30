@@ -52,7 +52,7 @@ public class Light : MonoBehaviour
     private void Update()
     {
         score = FindObjectOfType<GameManager>().score;
-        if (score.Contains("w") && score.Contains("s"))
+        if (score.Contains("w") && score.Contains("b"))
         {
             if (buildIndex != 11)
                 SceneManager.LoadScene(buildIndex + 1);
