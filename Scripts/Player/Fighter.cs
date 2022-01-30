@@ -15,7 +15,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] Health otherPlayer;
     [SerializeField] float attackRange=3f;
     [SerializeField] GameObject target;
-    [SerializeField] List<EnemyController_BW> enemies = new List<EnemyController_BW>();
+    [SerializeField] List<GameObject> enemies = new List<GameObject>();
     [SerializeField] UnityEvent attack_heal;
     void Start()
     {
@@ -24,20 +24,24 @@ public class Fighter : MonoBehaviour
         
     }
 
-    private List<EnemyController_BW> GetAllEnemies()
+    private List<GameObject> GetAllEnemies()
     {
-        List<EnemyController_BW> temp = new List<EnemyController_BW>();
+        List<GameObject> temp = new List<GameObject>();
         foreach (EnemyController_BW ec in FindObjectsOfType<EnemyController_BW>())
         {
-            temp.Add(ec);
+            temp.Add(ec.gameObject);
+        }
+        foreach (EnemyController ec in FindObjectsOfType<EnemyController>())
+        {
+            temp.Add(ec.gameObject);
         }
         return temp;
     }
-    private EnemyController_BW FindNearestEnemy()
+    private GameObject FindNearestEnemy()
     {
         float minDist = Mathf.Infinity;
-        EnemyController_BW nearestEnemy = null;
-        foreach (EnemyController_BW enemy in enemies)
+        GameObject nearestEnemy = null;
+        foreach (GameObject enemy in enemies)
         {
             float dist = FindDistance(enemy);
             if (minDist > dist)
@@ -49,7 +53,7 @@ public class Fighter : MonoBehaviour
         return nearestEnemy;
     }
 
-    private float FindDistance(EnemyController_BW enemy)
+    private float FindDistance(GameObject enemy)
     {
         return Vector3.Distance(enemy.transform.position, transform.position);
     }
@@ -58,10 +62,7 @@ public class Fighter : MonoBehaviour
     {
         enemies = GetAllEnemies();
         if (FindNearestEnemy() != null)
-            target = FindNearestEnemy().gameObject;
-        else
-            target = FindObjectOfType<EnemyController>().gameObject;
-        
+            target = FindNearestEnemy();
         Refill();
         if (GetComponent<PlayerController>().s == "b")
         {

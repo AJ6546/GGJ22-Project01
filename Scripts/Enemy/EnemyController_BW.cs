@@ -35,6 +35,7 @@ public class EnemyController_BW : MonoBehaviour
 
     void Update()
     {
+        if (GetComponent<Health>().isDead) return;
         targetPos = player.transform.position;
         transform.LookAt(player.transform);
         if (AtAttackingDistance())
