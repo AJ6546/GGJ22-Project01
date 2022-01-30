@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
     {
         if (spawnOnStart)
         {
-            Vector3 spawnPos = transform.position + new Vector3(Random.Range(min, max), height, Random.Range(min, max));
+            Vector3 spawnPos = new Vector3(Random.Range(min, max), height, Random.Range(min, max));
             Instantiate(obj, spawnPos, obj.transform.rotation);
         }
         else

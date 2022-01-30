@@ -13,6 +13,7 @@ public class TerrainSpawner : MonoBehaviour
     [SerializeField] int num;
     int buildIndex;
     [SerializeField] GameObject obj;
+    [SerializeField] string side="";
     void Start()
     {
         num = Random.Range(1, 100);
@@ -75,12 +76,19 @@ public class TerrainSpawner : MonoBehaviour
                 spawnPos = transform.position + transform.forward * offset;
                 break;
             case 4:
-                if (Random.Range(1, 100) % 2 == 0)
-                    offset = offset*-1;
-                if (Random.Range(1, 100) % 2 == 0)
+                int num = Random.Range(1, 100);
+                if (num < 33)
                     spawnPos = transform.position + transform.forward * offset;
+                else if (num > 33 && num < 66)
+                    spawnPos = transform.position + transform.forward * -offset;
                 else
-                    spawnPos = transform.position + transform.right * offset;
+                {
+                    if (side == "l")
+                        spawnPos = transform.position + transform.right * -offset;
+                    else
+                        spawnPos = transform.position + transform.right * offset;
+                }
+                    
                 break;
             case 10:
                 spawnPos = transform.position + transform.forward * offset;
