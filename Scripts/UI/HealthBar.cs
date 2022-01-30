@@ -7,13 +7,14 @@ public class HealthBar : MonoBehaviour
     [SerializeField] RectTransform foreground;
     void Start()
     {
-        healthComponent = GetComponentInParent<Health>();
+        if(healthComponent == null)
+            healthComponent = GetComponentInParent<Health>();
     }
 
     void Update()
     {
         foreground.localScale = new Vector3(Mathf.Max(healthComponent.GetHealthFactor(), 0), 1, 1);
-        if (healthComponent.GetHealthFactor()<=0)
+        if (healthComponent.isDead)
         { gameObject.SetActive(false); }
         else { gameObject.SetActive(true); }
     }

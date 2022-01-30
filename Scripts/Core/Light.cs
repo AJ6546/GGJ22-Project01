@@ -54,8 +54,10 @@ public class Light : MonoBehaviour
         score = FindObjectOfType<GameManager>().score;
         if (score.Contains("w") && score.Contains("s"))
         {
-            Debug.Log("Pass");
-            SceneManager.LoadScene(buildIndex + 1);
+            if (buildIndex != 11)
+                SceneManager.LoadScene(buildIndex + 1);
+            else
+                FindObjectOfType<GameManager>().ShowCredits();
         }
         if((buildIndex == 1 || buildIndex==5 )&& Time.time>nextPos)
         {

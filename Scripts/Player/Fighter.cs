@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Fighter : MonoBehaviour
@@ -15,11 +16,12 @@ public class Fighter : MonoBehaviour
     [SerializeField] float attackRange=3f;
     [SerializeField] GameObject target;
     [SerializeField] List<EnemyController_BW> enemies = new List<EnemyController_BW>();
+    [SerializeField] UnityEvent attack_heal;
     void Start()
     {
         cd = GetComponent<CooldownTimer>();
         anim = GetComponent<Animator>();
-        enemies = GetAllEnemies();
+        
     }
 
     private List<EnemyController_BW> GetAllEnemies()
@@ -54,13 +56,20 @@ public class Fighter : MonoBehaviour
 
     void Update()
     {
-        target = FindNearestEnemy().gameObject;
+        enemies = GetAllEnemies();
+        if (FindNearestEnemy() != null)
+            target = FindNearestEnemy().gameObject;
+        else
+            target = FindObjectOfType<EnemyController>().gameObject;
+        
         Refill();
         if (GetComponent<PlayerController>().s == "b")
         {
             if (cd.nextAttackTime["Heal"]
             < Time.time && attack_healButton.Pressed)
             {
+                attack_heal.Invoke();
+
                 anim.SetTrigger("Attack_Heal");
                 cd.nextAttackTime["Heal"] = cd.cooldownTimer["Heal"] + (int)Time.time;
                 fill.GetComponent<Image>().fillAmount = 1;
@@ -71,6 +80,7 @@ public class Fighter : MonoBehaviour
             if (cd.nextAttackTime["Attack2"]
             < Time.time && attack_healButton.Pressed)
             {
+                attack_heal.Invoke();
                 anim.SetTrigger("Attack_Heal");
                 cd.nextAttackTime["Attack2"] = cd.cooldownTimer["Attack2"] + (int)Time.time;
                 fill.GetComponent<Image>().fillAmount = 1;

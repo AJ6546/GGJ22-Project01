@@ -4,7 +4,7 @@ public class FaceCamera : MonoBehaviour
 {
     void Update()
     {
-        //transform.forward = Camera.main.transform.forward;
+        transform.forward = FindObjectOfType<Camera>().transform.forward;
     }
 }
 

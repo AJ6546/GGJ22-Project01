@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
@@ -9,6 +10,7 @@ public class Health : MonoBehaviour
     Animator anim;
     [SerializeField] GameObject obj;
     [SerializeField] GameManager gm;
+    public bool isDead;
     void Start()
     {
         healthpoints = startHealth;
@@ -21,16 +23,21 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(int dmg)
     {
+        if (isDead) return;
         healthpoints -= dmg;
+        
         if (Mathf.Max(healthpoints, 0) == 0)
         {
             anim.SetTrigger("Death");
+            isDead = true;
         }
     }
     void Death()
     {
         if(tag=="Enemy")
         {
+            if (SceneManager.GetActiveScene().buildIndex == 11 && !FindObjectOfType<EnemyController>().GetComponent<Health>().isDead)
+                return;
             if (SceneManager.GetActiveScene().buildIndex<6 || gm.killCount>= gm.reqkillCount)
             {
                 Vector3 spawnPos = new Vector3(transform.position.x, 1, transform.position.z);

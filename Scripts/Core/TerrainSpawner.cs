@@ -82,6 +82,9 @@ public class TerrainSpawner : MonoBehaviour
                 else
                     spawnPos = transform.position + transform.right * offset;
                 break;
+            case 10:
+                spawnPos = transform.position + transform.forward * offset;
+                break;
         }
         return spawnPos;
     }
