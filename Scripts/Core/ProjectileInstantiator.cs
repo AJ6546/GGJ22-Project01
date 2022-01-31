@@ -58,7 +58,7 @@ public class ProjectileInstantiator : MonoBehaviour
         if (s == "w")
         {
             if (cd.nextAttackTime["Attack"]
-            < Time.time && (Input.GetKeyDown("1") || attack_defendButton.Pressed))
+            < Time.time && (Input.GetKeyDown("9") || attack_defendButton.Pressed))
             {
                 anim.SetTrigger("Attack_Defend");
                 cd.nextAttackTime["Attack"] = cd.cooldownTimer["Attack"] + (int)Time.time;
@@ -68,7 +68,7 @@ public class ProjectileInstantiator : MonoBehaviour
         if (s == "b")
         {
             if (cd.nextAttackTime["Defend"]
-                < Time.time && (Input.GetKeyDown("2") || attack_defendButton.Pressed))
+                < Time.time && (Input.GetKeyDown("1") || attack_defendButton.Pressed))
             {
                 anim.SetTrigger("Attack_Defend");
                 cd.nextAttackTime["Defend"] = cd.cooldownTimer["Defend"] + (int)Time.time;

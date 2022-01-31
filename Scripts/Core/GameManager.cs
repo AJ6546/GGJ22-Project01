@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public string score = "";
-    [SerializeField] float cooldown=45,resetTime;
-    [SerializeField] GameObject gameOverPanel=null,creditsPanel=null;
+    [SerializeField] float cooldown = 45, resetTime;
+    [SerializeField] GameObject gameOverPanel = null, creditsPanel = null;
     [SerializeField] Text ip;
     [SerializeField] TMP_Text hint;
     [SerializeField] Image msg;
@@ -19,27 +19,27 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         resetTime = cooldown + (int)Time.time;
-        if(gameOverPanel!=null)
+        if (gameOverPanel != null)
             gameOverPanel.SetActive(false);
-        if(msg!=null)
+        if (msg != null)
             msg.gameObject.SetActive(false);
         if (creditsPanel != null)
             creditsPanel.SetActive(false);
     }
     private void Update()
     {
-        if ( Time.time > resetTime)
+        if (Time.time > resetTime)
         {
             score = "";
             resetTime = cooldown + (int)Time.time;
         }
-        if(hint)
+        if (hint)
             GetHints();
     }
 
     private void GetHints()
     {
-        switch(ip.text)
+        switch (ip.text)
         {
             case "1":
                 hint.text = "Collect the orbs that appear. Both the players must touch the orb within a 45 second window!";
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             case "2":
                 hint.text = "There is 1 in 10 chances of the orb appearing on a tile. The Black Player must walk on white tile " +
                     "&& White player must walk on black tile. There is 1 in 2 chances of either tile appearing!";
-                    break;
+                break;
             case "3":
                 hint.text = "Now the tiles could appear both in front or back of the player!";
                 break;
@@ -93,13 +93,13 @@ public class GameManager : MonoBehaviour
     }
     public void onEnterLevelButtonClicked()
     {
-        int lvl = Convert.ToInt32(ip.text);
-        if (lvl < 1 || lvl > 11)
+        List<string> list = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8" , "9", "10", "11"};
+        if (!list.Contains(ip.text))
         {
             msg.gameObject.SetActive(true);
             return;
         }
-        SceneManager.LoadScene(lvl);
+        SceneManager.LoadScene(Convert.ToInt32(ip.text));
     }
     public void onExitButtonClicked()
     {

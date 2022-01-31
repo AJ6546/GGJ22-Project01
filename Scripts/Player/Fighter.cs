@@ -13,7 +13,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] int healPoints,damage;
     Animator anim;
     [SerializeField] Health otherPlayer;
-    [SerializeField] float attackRange=3f;
+    [SerializeField] float attackRange=1f;
     [SerializeField] GameObject target;
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
     [SerializeField] UnityEvent attack_heal;
@@ -29,11 +29,13 @@ public class Fighter : MonoBehaviour
         List<GameObject> temp = new List<GameObject>();
         foreach (EnemyController_BW ec in FindObjectsOfType<EnemyController_BW>())
         {
-            temp.Add(ec.gameObject);
+            if(!ec.GetComponent<Health>().isDead) 
+                temp.Add(ec.gameObject);
         }
         foreach (EnemyController ec in FindObjectsOfType<EnemyController>())
         {
-            temp.Add(ec.gameObject);
+            if (!ec.GetComponent<Health>().isDead)
+                temp.Add(ec.gameObject);
         }
         return temp;
     }
@@ -67,7 +69,7 @@ public class Fighter : MonoBehaviour
         if (GetComponent<PlayerController>().s == "b")
         {
             if (cd.nextAttackTime["Heal"]
-            < Time.time && attack_healButton.Pressed)
+            < Time.time && (attack_healButton.Pressed || Input.GetKeyDown("2")))
             {
                 attack_heal.Invoke();
 
@@ -79,7 +81,7 @@ public class Fighter : MonoBehaviour
         if (GetComponent<PlayerController>().s == "w")
         {
             if (cd.nextAttackTime["Attack2"]
-            < Time.time && attack_healButton.Pressed)
+            < Time.time && (attack_healButton.Pressed || Input.GetKeyDown("0")))
             {
                 attack_heal.Invoke();
                 anim.SetTrigger("Attack_Heal");

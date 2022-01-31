@@ -51,14 +51,23 @@ public class Spawner : MonoBehaviour
     #region Attack_Defend
     void Spawn()
     {
-            if (cd.nextAttackTime["Spawn"]
-            < Time.time && (Input.GetKeyDown("1") || spawnButton.Pressed))
+        if (cd.nextAttackTime["Spawn"]
+        < Time.time)
+        { if (GetComponent<PlayerController>().s=="b" &&(Input.GetKeyDown("1") || spawnButton.Pressed))
             {
-                Vector3 spawnPos = otherPlayer.transform.position + new Vector3(Random.Range(min, max),0,Random.Range(min, max));
+                Vector3 spawnPos = otherPlayer.transform.position + new Vector3(Random.Range(min, max), 0, Random.Range(min, max));
                 Instantiate(obj, spawnPos, obj.transform.rotation);
                 cd.nextAttackTime["Spawn"] = cd.cooldownTimer["Spawn"] + (int)Time.time;
                 fill.GetComponent<Image>().fillAmount = 1;
             }
+            if (GetComponent<PlayerController>().s == "w" && (Input.GetKeyDown("9") || spawnButton.Pressed))
+            {
+                Vector3 spawnPos = otherPlayer.transform.position + new Vector3(Random.Range(min, max), 0, Random.Range(min, max));
+                Instantiate(obj, spawnPos, obj.transform.rotation);
+                cd.nextAttackTime["Spawn"] = cd.cooldownTimer["Spawn"] + (int)Time.time;
+                fill.GetComponent<Image>().fillAmount = 1;
+            }
+        }
     }
     #endregion
 }

@@ -46,7 +46,8 @@ public class Health : MonoBehaviour
             else
             {
                 FindObjectOfType<GameManager>().killCount += 1;
-                StartCoroutine(Respawn());
+                if(!GetComponent<EnemyController>())
+                    StartCoroutine(Respawn());
             }
         }
         if(tag=="Player")

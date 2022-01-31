@@ -57,6 +57,7 @@ public class EnemyController : MonoBehaviour
     }
     void Update()
     {
+        if (GetComponent<Health>().isDead) return;
         target = FindNearestPlayer().gameObject;
         targetPos = target.transform.position;
         if (AtAttackingDistance())
