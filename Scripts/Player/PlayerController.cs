@@ -34,14 +34,17 @@ public class PlayerController : MonoBehaviour
         if(s=="b")
         {
             control.m_Jump = Input.GetKey("space") || jumpButton.Pressed;
+            control.hInput = fixedJoystick.Horizontal + Input.GetAxis("Horizontal2");
+            control.vInput = fixedJoystick.Vertical + Input.GetAxis("Vertical2");
         }
-        if(s=="w")
+        if (s=="w")
         {
-            control.m_Jump = Input.GetKey("up") || jumpButton.Pressed;
+            control.m_Jump = Input.GetKey(KeyCode.RightAlt) || jumpButton.Pressed;
+            control.hInput = fixedJoystick.Horizontal + Input.GetAxis("Horizontal");
+            control.vInput = fixedJoystick.Vertical + Input.GetAxis("Vertical");
+
         }
-        control.hInput = fixedJoystick.Horizontal;
-        control.vInput = fixedJoystick.Vertical;
-        if(transform.position.y<=-5)
+        if (transform.position.y<=-5)
         {
             transform.position = startPos;
         }
